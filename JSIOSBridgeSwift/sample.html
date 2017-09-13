@@ -1,0 +1,101 @@
+<html>
+    <head>
+        <title>KRISHANBHAG</title>
+        <script type="text/javascript" src="script.js">	</script>
+    </head>
+    <style>
+    </style>
+    <body style="background-color:#00BCD4">
+        <div></div>
+        <div style="width:100%; text-align:left; color:#000">
+            <h3>OPERATION WITH IOS AND JAVASCRIPT</h3>
+        </div>
+        <div style="width:100%; text-align:left; color:#000">
+            <h3>==***==</h3>
+        </div>
+        <div style="width:100%; text-align:left; color:#000">
+            <h3>BUTTON ACTION</h3>
+        </div>
+        <input type="button" value="Push View controller" onClick="pushViewController()">
+        <div></div>
+        <div style="width:100%; text-align:left; color:#000">
+            <h3>==***==</h3>
+        </div>
+        <div style="width:100%; text-align:left; color:#000">
+            <h3>PUSH DATA TO IOS DATABASE</h3>
+        </div>
+        <form >
+            First name: <input type="text" name="firstname" id="firstNameId"><br><br>
+                Last name: <input type="text" name="lastname" id="lastNameId"><br><br>
+                    <input type="button" value="Push to core data" onClick="saveToDatabase()">
+                        </form>
+        
+        <div></div>
+        <div style="width:100%; text-align:left; color:#000">
+            <h3>==***==</h3>
+        </div>
+        <div style="width:100%; text-align:left; color:#000">
+            <h3>GET DATA TO IOS DATABASE</h3>
+        </div>
+        <form>
+            Search: <input type="text" name="firstname" id="firstNameGetId"><br><br>
+                <input type="button" value="Get from CoreData" onClick="fetchFromDatabase()">
+                    </form>
+        
+        
+        <table border = "1px solid black">
+            <thead>
+                <th>First Name</th>
+                <th>Last Name</th>
+            </thead>
+            <tbody id="myTable">
+            </tbody>
+        </table>
+        <br>
+        
+        
+        <script>
+            
+            window.onload = function() {
+                fetchFromDatabase()
+            };
+            
+            function pushViewController() {
+                
+                Android.pushViewController()
+                
+            }
+            function saveToDatabase() {
+                
+                var firstName = document.getElementById("firstNameId").value
+                var lastName = document.getElementById("lastNameId").value
+                console.log(firstName+"  "+lastName)
+            
+                Android.performClick(firstName,lastName,"","")
+                fetchFromDatabase()
+            
+            }
+            function fetchFromDatabase() {
+            
+                var table = document.getElementById("myTable");
+                table.innerHTML = '';
+                var subString = document.getElementById("firstNameGetId").value
+            
+                <!--TODO:remove all unwanted parameters-->
+                Android.displayDataToView(subString,"","","",function(eventname,data) {
+                                      debugger
+                                      var datJSON = JSON.parse(data);
+                                      
+                                      for (var i = 0; i < datJSON.length; i++){
+                                      
+                                      var row = table.insertRow(i);
+                                      var cell1 = row.insertCell(0);
+                                      var cell2 = row.insertCell(1);
+                                      cell1.innerHTML = datJSON[i].name;
+                                      cell2.innerHTML = datJSON[i].lastName;
+                                      }
+                                      })
+            }
+        
+            </script>
+    </body>
