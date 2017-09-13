@@ -7,3 +7,5 @@ Demo app demonstrates the use of iOS-JS bridge and three useful and basic featur
 2) Populate the data from webview into CoreData.
 
 3) Retrieve and present data on webview from CoreData.
+
+![alt text](http://g.recordit.co/ad4VO5BQLD.gif)
